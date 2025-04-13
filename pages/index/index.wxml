@@ -1,0 +1,45 @@
+<view class="container">
+  <view class="stats-container">
+    <view class="stats-grid">
+      <view class="stat-item title-item">
+        <text class="stat-label">称号</text>
+        <text class="stat-value">{{title}}</text>
+      </view>    
+      <view class="stat-item">
+        <text class="stat-label">年龄</text>
+        <text class="stat-value">{{age}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">职业</text>
+        <text class="stat-value">{{career}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">金钱</text>
+        <text class="stat-value">{{money}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">学历</text>
+        <text class="stat-value">{{education}}</text>
+      </view>
+    </view>
+
+    <view class="life-story">
+      <text class="story-title">人生经历</text>
+      <view class="story-content">{{lifeStory}}</view>
+    </view>
+  </view>
+
+  <view class="input-container">
+    <input 
+      class="input" 
+      placeholder="请输入您想做的事情" 
+      bindinput="handleInput" 
+      value="{{inputValue}}"
+      confirm-type="send"
+      bindconfirm="handleSubmit"
+    />
+    <button class="send-btn" bindtap="handleSubmit">
+      <text class="send-text">确定</text>
+    </button>
+  </view>
+</view>
