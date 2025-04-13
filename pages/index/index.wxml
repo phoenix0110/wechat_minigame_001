@@ -1,45 +1,58 @@
 <view class="container">
   <view class="stats-container">
+    <!-- 称号和属性部分 -->
     <view class="stats-grid">
       <view class="stat-item title-item">
-        <text class="stat-label">称号</text>
         <text class="stat-value">{{title}}</text>
-      </view>    
-      <view class="stat-item">
-        <text class="stat-label">年龄</text>
-        <text class="stat-value">{{age}}</text>
       </view>
-      <view class="stat-item">
-        <text class="stat-label">职业</text>
-        <text class="stat-value">{{career}}</text>
-      </view>
-      <view class="stat-item">
-        <text class="stat-label">金钱</text>
-        <text class="stat-value">{{money}}</text>
-      </view>
-      <view class="stat-item">
-        <text class="stat-label">学历</text>
-        <text class="stat-value">{{education}}</text>
+      <view class="stats-row">
+        <view class="stat-item compact">
+          <text class="stat-label">年龄</text>
+          <text class="stat-value">{{age}}</text>
+        </view>
+        <view class="stat-item compact">
+          <text class="stat-label">职业</text>
+          <text class="stat-value">{{career}}</text>
+        </view>
+        <view class="stat-item compact">
+          <text class="stat-label">金钱</text>
+          <text class="stat-value">{{money}}</text>
+        </view>
+        <view class="stat-item compact">
+          <text class="stat-label">学历</text>
+          <text class="stat-value">{{education}}</text>
+        </view>
       </view>
     </view>
 
+    <!-- 人生经历部分 -->
     <view class="life-story">
       <text class="story-title">人生经历</text>
-      <view class="story-content">{{lifeStory}}</view>
+      <scroll-view scroll-y class="story-scroll">
+        <view class="story-content">{{lifeStory}}</view>
+      </scroll-view>
     </view>
-  </view>
 
-  <view class="input-container">
-    <input 
-      class="input" 
-      placeholder="请输入您想做的事情" 
-      bindinput="handleInput" 
-      value="{{inputValue}}"
-      confirm-type="send"
-      bindconfirm="handleSubmit"
-    />
-    <button class="send-btn" bindtap="handleSubmit">
-      <text class="send-text">确定</text>
-    </button>
+    <!-- 系统独白部分 -->
+    <view class="system-narrative">
+      <text class="narrative-text">{{currentNarrative}}</text>
+    </view>
+
+    <!-- 选项和输入部分 - 移到 stats-container 内 -->
+    <view class="choice-block">
+      <button class="choice-item" bindtap="handleOption1">{{option1 || '选项1'}}</button>
+      <button class="choice-item" bindtap="handleOption2">{{option2 || '选项2'}}</button>
+      <view class="choice-item input-row">
+        <input 
+          class="custom-input" 
+          placeholder="或者输入您想做的事情" 
+          bindinput="handleInput" 
+          value="{{inputValue}}"
+          confirm-type="send"
+          bindconfirm="handleSubmit"
+        />
+        <button class="submit-btn" bindtap="handleSubmit">确定</button>
+      </view>
+    </view>
   </view>
 </view>
