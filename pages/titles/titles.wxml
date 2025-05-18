@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="title-header">
+    <text class="header-text">人生称号一览</text>
+    <view class="beat-percentage">
+      <text class="percentage-text">你打败了全国 <text class="percentage-number">{{beatPercentage}}%</text> 的玩家</text>
+    </view>
+    <text class="subtitle">已解锁 {{achievedCount}}/{{totalCount}} 个称号</text>
+  </view>
+  
+  <scroll-view scroll-y class="titles-container">
+    <view class="titles-grid">
+      <view class="title-item {{item.achieved ? 'achieved' : ''}}" wx:for="{{titles}}" wx:key="name">
+        <text class="title-text">{{item.name}}</text>
+      </view>
+    </view>
+  </scroll-view>
+  
+  <button class="back-btn" bindtap="goBack">返回</button>
+</view>

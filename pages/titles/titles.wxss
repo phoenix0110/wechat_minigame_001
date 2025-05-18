@@ -1,0 +1,135 @@
+.container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header-text {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  display: block;
+}
+
+.titles-container {
+  flex: 1;
+  height: 0;
+  margin-bottom: 20px;
+}
+
+.titles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 8px;
+}
+
+.title-item {
+  background: #f0f0f0;
+  border-radius: 8px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.title-item.achieved {
+  background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+  border: 1px solid #FFA000;
+}
+
+.title-text {
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+}
+
+.achieved .title-text {
+  font-weight: bold;
+  background: linear-gradient(to right, #F57C00, #FF6F00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.achieved::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 160, 0, 0.2),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+.back-btn {
+  background: linear-gradient(135deg, #8e9eab, #6c7989);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50px;
+  padding: 10px 24px;
+  box-shadow: 0 4px 15px rgba(142, 158, 171, 0.4);
+  border: none;
+  margin: 0 auto;
+  width: 50%;
+  max-width: 200px;
+}
+
+
+/* 添加百分比显示的样式 */
+.beat-percentage {
+  margin: 15px 0;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.3);
+  display: inline-block;
+}
+
+.percentage-text {
+  font-size: 16px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.percentage-number {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* 确保其他样式保持不变 */

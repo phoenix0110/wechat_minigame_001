@@ -13,12 +13,23 @@ const configuration = new Configuration({
 })
 const openai = new OpenAIApi(configuration)
 
+// 获取最近的对话历史记录
+function getRecentHistory(messageHistory, count = 5) {
+  if (!messageHistory || !Array.isArray(messageHistory)) {
+    return [];
+  }
+  return messageHistory.slice(-count);
+}
+
 async function generateEvent(currentState, messageHistory) {
+  // 只使用最近的5条对话历史
+  const recentHistory = getRecentHistory(messageHistory, 5);
+  
   const completion = await openai.createChatCompletion({
     model: OPENAI_CONFIG.model,
     messages: [
       { role: "system", content: EVENT_SYSTEM_PROMPT },
-      { role: "user", content: `当前状态：${JSON.stringify(currentState)}\n历史对话：${JSON.stringify(messageHistory)}` }
+      { role: "user", content: `当前状态：${JSON.stringify(currentState)}\n历史对话：${JSON.stringify(recentHistory)}` }
     ],
     temperature: 0.8  // 增加随机性
   })
@@ -27,11 +38,14 @@ async function generateEvent(currentState, messageHistory) {
 }
 
 async function processUserChoice(message, currentState) {
+  // 只使用最近的5条对话历史
+  const recentHistory = getRecentHistory(currentState.messageHistory, 5);
+  
   const completion = await openai.createChatCompletion({
     model: OPENAI_CONFIG.model,
     messages: [
       { role: "system", content: CHOICE_SYSTEM_PROMPT },
-      { role: "user", content: `当前状态：${JSON.stringify(currentState)}\n用户选择：${message}` }
+      { role: "user", content: `当前状态：${JSON.stringify({...currentState, messageHistory: recentHistory})}\n用户输入：${message}` }
     ],
     temperature: 0.6
   })
@@ -45,7 +59,7 @@ exports.main = async (event, context) => {
     
     if (!message) {
       // 如果没有用户输入，生成新的随机事件
-      const eventData = await generateEvent(currentState, currentState.messageHistory)
+      const eventData = await generateEvent(currentState, currentState.messageHistory || [])
       return {
         success: true,
         data: {
@@ -56,9 +70,26 @@ exports.main = async (event, context) => {
         }
       }
     } else {
-      // 处理用户的选择
+      // 有用户输入时，处理用户选择
       const response = await processUserChoice(message, currentState)
       
+      // 检查处理后的年龄是否超过100岁
+      if (response.age >= 100) {
+        return {
+          success: true,
+          data: {
+            ...response,
+            gameOver: true,
+            currentNarrative: `你已经活到了${response.age}岁，完成了这一生的旅程。`,
+            option1: '',
+            option2: ''
+          }
+        }
+      }
+      
+      console.log('用户输入:', message);
+      console.log('用户状态:', currentState);
+      console.log('模型输出:', response);
       // 生成新的事件
       const eventData = await generateEvent(response, currentState.messageHistory)
       

@@ -176,7 +176,7 @@
   width: 100%;
   height: 44px;
   padding: 0 16px;
-  background: #FFF5F5;  /* 更淡的粉色底色 */
+  background: linear-gradient(135deg, #fff5f5, #fff0f0);
   border: none;
   border-radius: 8px;
   font-size: 14px;
@@ -185,29 +185,51 @@
   align-items: center;
   text-align: left;
   line-height: 1.4;
+  box-shadow: 0 2px 4px rgba(255, 122, 127, 0.15), 
+              inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .custom-input {
   flex: 1;
   height: 44px;
   padding: 0 16px;
-  background: #FFF5F5;  /* 更淡的粉色底色 */
+  background: linear-gradient(135deg, #fff5f5, #fff0f0);
   border: none;
   border-radius: 8px;
   font-size: 14px;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(255, 122, 127, 0.15), 
+              inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  transition: all 0.2s ease;
 }
 
 .submit-btn {
   width: 80px;
   height: 44px;
-  background: #FFF5F5;  /* 更淡的粉色底色 */
+  background: linear-gradient(135deg, #ff9a9e, #ff7a7f);
   border: none;
   border-radius: 8px;
   font-size: 14px;
-  color: #333;
+  font-weight: bold;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 3px 6px rgba(255, 122, 127, 0.3), 
+              0 1px 3px rgba(0, 0, 0, 0.1),
+              inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 2px rgba(255, 122, 127, 0.3);
+  background: linear-gradient(135deg, #ff8a8e, #ff6a6f);
 }
 
 .choice-item:active, .submit-btn:active {
@@ -218,4 +240,95 @@
   display: flex;
   gap: 8px;
   padding: 0 !important;
+}
+
+/* 重新设计再来一次按钮 */
+.restart-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50px;
+  padding: 12px 24px;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+  border: none;
+  margin: 20px auto 10px;  /* 修改下边距，为新按钮留出空间 */
+  width: 80%;
+  max-width: 400px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: pulse 1.5s infinite;
+}
+
+.restart-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.restart-btn-hover {
+  transform: scale(1.05);
+  box-shadow: 0 7px 20px rgba(255, 107, 107, 0.6);
+  background: linear-gradient(135deg, #ff5252, #ff7043);
+}
+
+.restart-btn:hover::before {
+  left: 100%;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.6);
+  }
+  100% {
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+  }
+}
+
+/* 查看称号按钮样式 */
+.view-titles-btn {
+  background: linear-gradient(135deg, #8e9eab, #6c7989);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50px;
+  padding: 10px 24px;
+  box-shadow: 0 4px 15px rgba(142, 158, 171, 0.4);
+  border: none;
+  margin: 0 auto 20px;
+  width: 80%;
+  max-width: 400px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.view-titles-btn-hover {
+  transform: scale(1.05);
+  box-shadow: 0 7px 20px rgba(142, 158, 171, 0.6);
+  background: linear-gradient(135deg, #7d8b98, #5b6877);
+}
+
+.view-titles-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.view-titles-btn:hover::before {
+  left: 100%;
 }

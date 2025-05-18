@@ -16,7 +16,7 @@
         </view>
         <view class="stat-item compact">
           <text class="stat-label">金钱</text>
-          <text class="stat-value">{{money}}</text>
+          <text class="stat-value">{{money}}万</text>
         </view>
         <view class="stat-item compact">
           <text class="stat-label">学历</text>
@@ -29,7 +29,7 @@
     <view class="life-story">
       <text class="story-title">人生经历</text>
       <scroll-view scroll-y class="story-scroll">
-        <view class="story-content">{{lifeStory}}</view>
+        <text class="story-content" decode="{{true}}">{{lifeStory}}</text>
       </scroll-view>
     </view>
 
@@ -38,8 +38,14 @@
       <text class="narrative-text">{{currentNarrative}}</text>
     </view>
 
-    <!-- 选项和输入部分 - 移到 stats-container 内 -->
-    <view class="choice-block">
+    <!-- 游戏结束时显示"再来一次"按钮 -->
+    <view class="choice-block" wx:if="{{gameOver}}">
+      <button class="restart-btn" hover-class="restart-btn-hover" bindtap="restartGame">再来一次</button>
+      <button class="view-titles-btn" hover-class="view-titles-btn-hover" bindtap="viewTitles">查看本次达成的称号</button>
+    </view>
+
+    <!-- 游戏未结束时显示选项和输入 -->
+    <view class="choice-block" wx:else>
       <button class="choice-item" bindtap="handleOption1">{{option1 || '选项1'}}</button>
       <button class="choice-item" bindtap="handleOption2">{{option2 || '选项2'}}</button>
       <view class="choice-item input-row">
